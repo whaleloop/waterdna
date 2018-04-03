@@ -16,6 +16,10 @@ Manage your water. Beautifully
 - # Run Locally
 	1) `sls invoke local -f NAME_OF_FUNCTION`
 
+- # Deployment
+	1) `sls deploy -f NAME_OF_FUNCTION`
+		- or to deploy all `sls deploy`
+
 
 # WebApp (React Redux)
 
