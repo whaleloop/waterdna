@@ -6,3 +6,4 @@ app/build/**/*
 # Serverless directories
 server/.serverless
 server/.env.yml
+/**/*.DS_Store
