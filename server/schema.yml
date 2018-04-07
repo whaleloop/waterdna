@@ -1,0 +1,13 @@
+UsersTable:
+  Type: AWS::DynamoDB::Table
+  Properties:
+    TableName: UsersTable
+    AttributeDefinitions:
+      - AttributeName: email
+        AttributeType: S
+    KeySchema:
+      - AttributeName: email
+        KeyType: HASH
+    ProvisionedThroughput:
+      ReadCapacityUnits: 1
+      WriteCapacityUnits: 1

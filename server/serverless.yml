@@ -97,8 +97,9 @@ functions:
 #      variable2: value2
 
 # you can add CloudFormation resource templates here
-#resources:
-#  Resources:
+resources:
+  Resources:
+    UsersTable: ${file(schema.yml):UsersTable}
 #    NewResource:
 #      Type: AWS::S3::Bucket
 #      Properties:
@@ -109,18 +110,22 @@ functions:
 #       Value: "Some output value"
 
 plugins:
-  # - serverless-env-generator
-  - serverless-domain-manager
+  # - serverless-domain-manager
+  - serverless-dynamodb-local
   - serverless-offline
 
 custom:
+  dynamodb:
+    start:
+      port: ${file(.env.yml):${self:provider.stage}.DYNAMO_OFFLINE_PORT}
+      migrate: true
   serverless-offline:
     port: ${file(.env.yml):${self:provider.stage}.OFFLINE_PORT}
-  customDomain:
-    domainName: ${file(.env.yml):${self:provider.stage}.DOMAIN_NAME}
-    certificateName: ${file(.env.yml):${self:provider.stage}.CERTIFICATE_NAME}
-    basePath: ${file(.env.yml):${self:provider.stage}.BASE_PATH}
-    stage: ${self:provider.stage}
-    createRoute53Record: true
-    hostedZoneId: ${file(.env.yml):${self:provider.stage}.HOSTED_ZONE_ID}
-    endpointType: ${file(.env.yml):${self:provider.stage}.ENDPOINT_TYPE}
+  # customDomain:
+  #   domainName: ${file(.env.yml):${self:provider.stage}.DOMAIN_NAME}
+  #   certificateName: ${file(.env.yml):${self:provider.stage}.CERTIFICATE_NAME}
+  #   basePath: ${file(.env.yml):${self:provider.stage}.BASE_PATH}
+  #   stage: ${self:provider.stage}
+  #   createRoute53Record: true
+  #   hostedZoneId: ${file(.env.yml):${self:provider.stage}.HOSTED_ZONE_ID}
+  #   endpointType: ${file(.env.yml):${self:provider.stage}.ENDPOINT_TYPE}
