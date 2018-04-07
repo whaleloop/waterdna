@@ -9,9 +9,11 @@ Manage your water. Beautifully
 - # Installation
 	1) Install serverless framework
 		- `npm install -g serverless`
+	2) Install Dependencies
+		- `npm i`
 	2) Login into serverless framework with your AWS credentials
 		- get your credentials from Kendrick
-		- `sls login`
+		- `sls config credentials --provider aws --key KEY --secret SECRET`
 
 - # Invoke Function Locally
 	1) `sls invoke local -f NAME_OF_FUNCTION`
