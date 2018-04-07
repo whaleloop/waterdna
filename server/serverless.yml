@@ -99,7 +99,7 @@ functions:
 # you can add CloudFormation resource templates here
 resources:
   Resources:
-    UsersTable: ${file(schema.yml):UsersTable}
+    UsersTable: ${file(schema.json):UsersTable}
 #    NewResource:
 #      Type: AWS::S3::Bucket
 #      Properties:
