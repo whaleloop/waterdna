@@ -42,7 +42,8 @@ provider:
 #            - "/*"
 
 # you can define service wide environment variables here
-#  environment:
+ # environment:
+ #     domain: api.kendrickparks.com
 #    variable1: value1
 
 # you can add packaging information here
@@ -57,7 +58,11 @@ provider:
 functions:
   hello:
     handler: functions/test/handler.hello
-
+    events:
+      - http:
+          path: tests/hello
+          method: GET
+          cors: true
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
@@ -102,3 +107,20 @@ functions:
 #     NewOutput:
 #       Description: "Description for the output"
 #       Value: "Some output value"
+
+plugins:
+  # - serverless-env-generator
+  - serverless-domain-manager
+  - serverless-offline
+
+custom:
+  serverless-offline:
+    port: ${file(.env.yml):${self:provider.stage}.OFFLINE_PORT}
+  customDomain:
+    domainName: ${file(.env.yml):${self:provider.stage}.DOMAIN_NAME}
+    certificateName: ${file(.env.yml):${self:provider.stage}.CERTIFICATE_NAME}
+    basePath: ${file(.env.yml):${self:provider.stage}.BASE_PATH}
+    stage: ${self:provider.stage}
+    createRoute53Record: true
+    hostedZoneId: ${file(.env.yml):${self:provider.stage}.HOSTED_ZONE_ID}
+    endpointType: ${file(.env.yml):${self:provider.stage}.ENDPOINT_TYPE}

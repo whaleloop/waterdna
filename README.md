@@ -13,12 +13,16 @@ Manage your water. Beautifully
 		- get your credentials from Kendrick
 		- `sls login`
 
-- # Run Locally
+- # Invoke Function Locally
 	1) `sls invoke local -f NAME_OF_FUNCTION`
+
+- # Run Locally
+	1) `npm start`
 
 - # Deployment
 	1) `sls deploy -f NAME_OF_FUNCTION`
-		- or to deploy all `sls deploy`
+		- or to deploy all `npm run deploy`
+
 
 
 # WebApp (React Redux)
@@ -44,10 +48,8 @@ Manage your water. Beautifully
 	2) configure aws-cli
 		- `aws configure`
 		- enter in IAM credentials
-	3) build app
-		- yarn build
-	4) navigate to build folder
-		- cd build
-	5) update s3 bucket
-		- *BE SURE YOU ARE IN THE BUILD FOLDER*
-		- `aws s3 cp . s3://waterapp.com/ --recursive`
+	3) setup .env.production
+		- get values from kendrick
+		- should match structure of .env.development.local
+	3) build & deploy app
+		- `npm run deploy`
