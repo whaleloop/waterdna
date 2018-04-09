@@ -7,7 +7,7 @@ module.exports.hello = (event, context, callback) => {
 	   'Access-Control-Allow-Origin' : '*'
 	},
     body: JSON.stringify({
-      message: 'Go Serverless v1.0! Your function executed successfully!',
+      message: 'Haster Basin',
       input: event.message,
     }),
   };
