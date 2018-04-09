@@ -1,42 +1,12 @@
-.App-header {
-  background-color: #3cafdb;
-  height: 50px;
-  padding: 20px;
-  color: white;
-}
-
-.App-header > .left {
-	float: left;
-}
-
-.App-header > .right {
-	float: right;
-}
-
-.App-header > * {
-	line-height: 50px;
-	margin: 0 15px;
-}
-
-.App-header .alert-icon {
-	margin-top: 12.5px
-}
-
-.App-header input {
-	padding: 10px;
-	font-size: 20px;
-}
-
 .App > .App-intro {
-  padding: 20px;
-  font-size: large;
+	padding: 30px;
+	font-size: large;
+}
+
+.App {
+	background-color: #e8e9ee;
 }
 
 .App > .App-intro h2 {
-  margin: 0;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+ 	margin: 0;
 }
