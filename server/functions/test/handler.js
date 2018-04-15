@@ -7,8 +7,7 @@ module.exports.hello = (event, context, callback) => {
 	   'Access-Control-Allow-Origin' : '*'
 	},
     body: JSON.stringify({
-      message: 'Haster Basin',
-      input: event.message,
+      message: 'Haster Basin'
     }),
   };
 

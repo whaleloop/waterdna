@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import AppComponent from '../../components/app/App';
 import { getTestHello } from '../../actions/app';
-import { getDevice, getDevices } from '../../actions/device';
+import { getDevices } from '../../actions/device';
 import { getMeasurements } from '../../actions/measurement';
 
 function mapStateToProps(state) {
@@ -18,7 +18,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
 	return {
 		getTestHello: () => dispatch(getTestHello()),
-		getDevice: (deviceId) => dispatch(getDevice(deviceId)),
 		getDevices: () => dispatch(getDevices()),
 		getMeasurements: (deviceId) => dispatch(getMeasurements(deviceId))
 	};

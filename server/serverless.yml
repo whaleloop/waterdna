@@ -63,6 +63,13 @@ functions:
           path: tests/hello
           method: GET
           cors: true
+  getDevices:
+    handler: functions/device/handler.getDevices
+    events:
+      - http:
+          path: devices
+          method: GET
+          cors: true
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
@@ -97,12 +104,12 @@ functions:
 #      variable2: value2
 
 # you can add CloudFormation resource templates here
-resources:
-  Resources:
-    DevicesTable: ${file(schema.json):DevicesTable}
-    MeasurementsTable: ${file(schema.json):MeasurementsTable}
-    MeasurementTypeTable: ${file(schema.json):MeasurementTypeTable}
-    MeasurementUnitTable: ${file(schema.json):MeasurementUnitTable}
+# resources:
+#   Resources:
+#     DevicesTable: ${file(schema.json):DevicesTable}
+#     MeasurementsTable: ${file(schema.json):MeasurementsTable}
+#     MeasurementTypeTable: ${file(schema.json):MeasurementTypeTable}
+#     MeasurementUnitTable: ${file(schema.json):MeasurementUnitTable}
 #    NewResource:
 #      Type: AWS::S3::Bucket
 #      Properties:
@@ -114,14 +121,14 @@ resources:
 
 plugins:
   # - serverless-domain-manager
-  - serverless-dynamodb-local
+  # - serverless-dynamodb-local
   - serverless-offline
 
 custom:
-  dynamodb:
-    start:
-      port: ${file(.env.yml):${self:provider.stage}.DYNAMO_OFFLINE_PORT}
-      migrate: true
+  # dynamodb:
+  #   start:
+  #     port: ${file(.env.yml):${self:provider.stage}.DYNAMO_OFFLINE_PORT}
+  #     migrate: true
   serverless-offline:
     port: ${file(.env.yml):${self:provider.stage}.OFFLINE_PORT}
   # customDomain:

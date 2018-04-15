@@ -129,7 +129,6 @@ export const getMeasurements = (deviceId) => (
 		// return fetch(url)
 			// .then(response => response.json())
 		let results = measurements.filter( measurement => measurement.deviceId === deviceId )
-
 		return Promise.resolve({ measurements: results })
 			.then(response => dispatch(getMeasurementsComplete(response.measurements)))
 			.catch((error) => {
