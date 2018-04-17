@@ -10,8 +10,12 @@ class Device extends React.Component {
 	constructor(props, context) {
 		super(props, context)
 
-		this.hasLoaded = false
 		this.device = {}
+		this.interval = setInterval(() => {
+			if (this.props.match.params.deviceId) {
+				this.props.getMeasurements(this.props.match.params.deviceId)
+			}
+		}, 2000)
 	}
 
 	componentWillMount () {
@@ -20,10 +24,8 @@ class Device extends React.Component {
 		}
 	}
 
-	componentWillReceiveProps(nextProps) {
-		if (nextProps.measurements.length > 0) {
-			// console.log(nextProps)
-		}
+	componentWillUnMount () {
+		clearInterval(this.interval)
 	}
 
 	render() {
@@ -33,7 +35,7 @@ class Device extends React.Component {
 		}
 
 		return (
-			<section className="App-intro">
+			<section>
 				<h2>{this.device.displayName}</h2>
 				<div className="Device">
 					<div className="measurements">

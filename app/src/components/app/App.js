@@ -2,7 +2,7 @@ import React from 'react';
 import logo from '../../static/logo.svg';
 import './App.css';
 import NavBar from '../navbar/NavBar';
-import Device from '../device/Device';
+import Device from '../devices/Device';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 class AppComponent extends React.Component {

@@ -24,6 +24,16 @@ provider:
 # you can overwrite defaults here
   stage: dev
   region: us-west-2
+  allowed-headers:
+    - Content-Type
+    - X-Amz-Date
+    - Authorization
+    - X-Api-Key
+    - X-Amz-Security-Token
+    - X-Amz-User-Agent
+    - Access-Control-Allow-Headers
+    - Access-Control-Allow-Origin
+    - Device-Id
 
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:
@@ -70,6 +80,15 @@ functions:
           path: devices
           method: GET
           cors: true
+  getMeasurements:
+    handler: functions/measurement/handler.getMeasurements
+    events:
+      - http:
+          path: measurements
+          method: GET
+          cors:
+            origin: '*'
+            headers: ${self:provider.allowed-headers}
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details

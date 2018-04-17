@@ -1,19 +1,10 @@
-import MeasurementActionTypes from '../constants/measurementActionTypes';
-import moment from 'moment'
-
-const getMeasurementsError = error =>
-	({ type: MeasurementActionTypes.GetMeasurementsError, error })
-
-const getMeasurementsComplete = payload =>
-	({ type: MeasurementActionTypes.GetMeasurementsComplete, payload });
-
-let now = moment(new Date())
+'use strict';
 
 const measurements = [
 	{
 		measurementID: '321abc',
 		deviceId: '123xyz',
-		createdOn: now.hour(1),
+		createdOn: '2018-04-16T08:28:23.937Z',
 		payload: [
 			{ type: 'temperature', value: 29.1, unit: 'C' },
 			{ type: 'dissolved_oxygen', value: 8.7, unit: 'mg L' },
@@ -24,7 +15,7 @@ const measurements = [
 	{
 		measurementID: '321abc',
 		deviceId: '123xyz',
-		createdOn: now.hour(3),
+		createdOn: '2018-04-16T10:28:23.937Z',
 		payload: [
 			{ type: 'temperature', value: 30.1, unit: 'C' },
 			{ type: 'dissolved_oxygen', value: 8.9, unit: 'mg L' },
@@ -35,7 +26,7 @@ const measurements = [
 	{
 		measurementID: '321abc',
 		deviceId: '123xyz',
-		createdOn: now.hour(6),
+		createdOn: '2018-04-16T13:28:23.937Z',
 		payload: [
 			{ type: 'temperature', value: 29.8, unit: 'C' },
 			{ type: 'dissolved_oxygen', value: 8.8, unit: 'mg L' },
@@ -46,7 +37,7 @@ const measurements = [
 	{
 		measurementID: '321abc',
 		deviceId: '123xyz',
-		createdOn: now.hour(9),
+		createdOn: '2018-04-16T16:28:23.937Z',
 		payload: [
 			{ type: 'temperature', value: 29.5, unit: 'C' },
 			{ type: 'dissolved_oxygen', value: 9.2, unit: 'mg L' },
@@ -57,7 +48,7 @@ const measurements = [
 	{
 		measurementID: '321abc',
 		deviceId: '123xyz',
-		createdOn: now.hour(12),
+		createdOn: '2018-04-16T19:28:23.937Z',
 		payload: [
 			{ type: 'temperature', value: 27.3, unit: 'C' },
 			{ type: 'dissolved_oxygen', value: 8.5, unit: 'mg L' },
@@ -68,7 +59,7 @@ const measurements = [
 	{
 		measurementID: '321abc',
 		deviceId: '123xyz',
-		createdOn: now.hour(15),
+		createdOn: '2018-04-16T22:28:23.937Z',
 		payload: [
 			{ type: 'temperature', value: 28.8, unit: 'C' },
 			{ type: 'dissolved_oxygen', value: 8.2, unit: 'mg L' },
@@ -79,7 +70,7 @@ const measurements = [
 	{
 		measurementID: '321abc',
 		deviceId: '123xyz',
-		createdOn: now.hour(18),
+		createdOn: '2018-04-17T01:30:08.935Z',
 		payload: [
 			{ type: 'temperature', value: 28.4, unit: 'C' },
 			{ type: 'dissolved_oxygen', value: 8.4, unit: 'mg L' },
@@ -90,7 +81,7 @@ const measurements = [
 	{
 		measurementID: '321abc',
 		deviceId: '123xyz',
-		createdOn: now.hour(21),
+		createdOn: '2018-04-17T04:30:08.935Z',
 		payload: [
 			{ type: 'temperature', value: 28.3, unit: 'C' },
 			{ type: 'dissolved_oxygen', value: 8.6, unit: 'mg L' },
@@ -101,7 +92,7 @@ const measurements = [
 	{
 		measurementID: '321abc',
 		deviceId: '123xyz',
-		createdOn: now.hour(23),
+		createdOn: '2018-04-17T06:30:08.935Z',
 		payload: [
 			{ type: 'temperature', value: 29.0, unit: 'C' },
 			{ type: 'dissolved_oxygen', value: 8.9, unit: 'mg L' },
@@ -112,7 +103,7 @@ const measurements = [
 	{
 		measurementID: '321abc',
 		deviceId: '123xyz',
-		createdOn: now.hour(24),
+		createdOn: '2018-04-17T07:30:08.935Z',
 		payload: [
 			{ type: 'temperature', value: 28.9, unit: 'C' },
 			{ type: 'dissolved_oxygen', value: 8.3, unit: 'mg L' },
@@ -122,26 +113,20 @@ const measurements = [
 	}
 ]
 
-export const getMeasurements = (deviceId) => (
-	(dispatch) => {
-		dispatch({ type: MeasurementActionTypes.GetMeasurements });
-		let url = process.env.REACT_APP_DOMAIN + '/measurements';
-		let options = {
-			headers: new Headers({
-				'Content-Type': 'application/json',
-				'Device-Id': deviceId
+module.exports.getMeasurements = (event, context, callback) => {
+	try {
+		const response = {
+			statusCode: 200,
+			headers: {
+				'Access-Control-Allow-Origin' : '*'
+			},
+			body: JSON.stringify({
+				measurements: measurements.filter(measurement => measurement.deviceId === event.headers['device-id'])
 			})
 		};
 
-		return fetch(url, options)
-			.then(response => response.json())
-		// let results = measurements.filter( measurement => measurement.deviceId === deviceId )
-		// return Promise.resolve({ measurements: results })
-			.then(response => dispatch(getMeasurementsComplete(response.measurements)))
-			.catch((error) => {
-				const errorClone = Object.assign({}, error);
-				errorClone.message = `${MeasurementActionTypes.GetMeasurements} ERROR: ${error}`;
-				dispatch(getMeasurementsError(errorClone));
-			});
+		callback(null, response);
+	} catch (e) {
+		callback(e, null)
 	}
-);
+};

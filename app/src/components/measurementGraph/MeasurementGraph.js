@@ -2,6 +2,7 @@ import React from 'react';
 import logo from '../../static/logo.svg';
 import './MeasurementGraph.css';
 import { Line, Chart } from 'react-chartjs-2';
+import moment from 'moment'
 
 class MeasurementGraph extends React.Component {
 	render() {
@@ -24,7 +25,7 @@ class MeasurementGraph extends React.Component {
 							}
 							let payload = measurement.payload.find( reading => reading.type === this.props.type)
 							return {
-								x: measurement.createdOn.format('k:mm'),
+								x: moment(measurement.createdOn).format('k:mm'),
 								y: payload.value
 							}
 						}),

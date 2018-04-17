@@ -18,11 +18,8 @@ module.exports.getDevices = (event, context, callback) => {
 			})
 		};
 
-		console.log(event.headers)
-
 		callback(null, response);
 	} catch (e) {
-		console.log(e)
 		callback(e, null)
 	}
 };

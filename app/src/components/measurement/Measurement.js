@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from '../../static/logo.svg';
 import './Measurement.css';
+import moment from 'moment';
 
 class Measurement extends React.Component {
 	render() {
@@ -15,7 +16,7 @@ class Measurement extends React.Component {
 			type = this.props.type.split('_').map(word => word.substr(0, 1).toUpperCase() + word.substr(1)).join(' ')
 			unit = payload.unit
 			value = payload.value
-			createdOn = this.props.measurement.createdOn.format('h:mm:ss A')
+			createdOn = moment(this.props.measurement.createdOn).format('h:mm:ss A')
 		}
 
 
